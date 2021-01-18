@@ -2,15 +2,7 @@
 <?php 
 include('response.php');
 $newObj = new DbQuery();
-$emps = $newObj->getPizzaOrderList();
-?>
-<?php
-if (isset($_GET['editID'])) {
-    echo '<script>alert("Welcome to Geeks for Geeks")</script>'; 
-    $msg = '';
-    // Check if POST data is not empty
-  
-}
+$emps = $newObj->getSupplierList();
 ?>
 
 
