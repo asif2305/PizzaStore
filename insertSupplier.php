@@ -1,7 +1,7 @@
 <?php 
 include('response.php');
 $connection = new DbQuery();
-
+#################################################################  Supplier Start
 if(isset($_POST['insert_data'])){
     $suppliername=$_POST['suppliername'];
     $supplieraddress=$_POST['supplieraddress'];
@@ -20,7 +20,18 @@ if(isset($_POST['update_data'])){
 
     $emps = $connection->updateSupplierData($supplierId,$suppliername,$supplieraddress,$visibility);
 
+
+
+
 }
 
+if(isset($_POST['delete_data'])){
+    $supplierId=$_POST['deletesupplierId'];
+   
+
+    $emps = $connection->deleteSupplierData($supplierId);
+
+}
+#################################################################  Supplier End
 
 ?>

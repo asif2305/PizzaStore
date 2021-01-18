@@ -120,26 +120,7 @@ $emps = $newObj->getSupplierList();
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area mr-1"></i>
-                                    Area Chart Example
-                                </div>
-                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar mr-1"></i>
-                                    Bar Chart Example
-                                </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
 
@@ -233,19 +214,22 @@ $emps = $newObj->getSupplierList();
                                             <th>Supplier Name</th>
                                             <th>Address</th>
                                             <th>Visibility</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
+                                            <th>Operations</th>
+
 
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>Supplier ID</th>
                                             <th>Supplier Name</th>
                                             <th>Address</th>
                                             <th>Visibility</th>
+                                            <th>Operations</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        <?php if(is_array($emps)){?>
                                         <?php foreach($emps as $key => $emp) :?>
                                         <tr>
                                             <td><?php echo $emp['SupplierId'] ?></td>
@@ -266,13 +250,13 @@ $emps = $newObj->getSupplierList();
                                                     <button type="button"
                                                         class="btn btn-warning btn-xs editSupplier">Edit</button>
                                                     <button type="button"
-                                                        class="btn btn-warning btn-xs deleteSupplier">Delete</button>
+                                                        class="btn btn-danger btn-xs deleteSupplier">Delete</button>
 
                                                 </div>
                                             </td>
                                         </tr>
-                                        <?php endforeach;?>
-
+                                        <?php endforeach; ?>
+                                        <?php }?>
                                     </tbody>
                                 </table>
                             </div>
@@ -333,8 +317,35 @@ $emps = $newObj->getSupplierList();
                     </div>
                 </div>
                 <!-- Supplier EDIT  #################################################################- END-->
-                <!-- Supplier End  #################################################################- -->
+                <!-- Supplier DELETE #################################################################- START-->
+                <div class="modal fade" id="deleteSupplierModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-dark" id="exampleModalLabel">Delete Supplier</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="insertSupplier.php" method="POST">
+                                <div class="modal-body">
+                                    <input type="hidden" id="deletesupplierId" name="deletesupplierId">
+                                    <h4>Do you want to Delete this Data ??</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                                    <button type="submit" name="delete_data" class="btn btn-primary">Yes !! Delete
+                                        it.</button>
+                                </div>
+                            </form>
+                        </div>
 
+                    </div>
+                </div>
+                <!-- Supplier DELETE  #################################################################- END-->
+                <!-- Supplier End  #################################################################- -->
+                <!-- Ingredient Start  #################################################################- -->
 
                 <div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -511,6 +522,7 @@ $emps = $newObj->getSupplierList();
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/datatables-demo.js"></script>
 
+    <!-- Supplier Update  #################################################################- -->
     <script>
     $(document).ready(function() {
         $('.editSupplier').on('click', function() {
@@ -521,9 +533,6 @@ $emps = $newObj->getSupplierList();
                 return $(this).text();
             }).get();
 
-            console.log(data);
-            console.log(data[3]);
-
             $('#EditsupplierId').val(data[0]);
             $('#Editsuppliername').val(data[1]);
             $('#Editsupplieraddress').val(data[2]);
@@ -532,6 +541,27 @@ $emps = $newObj->getSupplierList();
         });
     });
     </script>
+    <!-- Supplier Update  #################################################################- -->
+
+    <!-- Supplier Delete  #################################################################- -->
+    <script>
+    $(document).ready(function() {
+        $('.deleteSupplier').on('click', function() {
+            $('#deleteSupplierModal').modal('show');
+
+            $tr = $(this).closest('tr');
+            var data = $tr.children('td').map(function() {
+                return $(this).text();
+            }).get();
+
+            $('#deletesupplierId').val(data[0]);
+
+
+
+        });
+    });
+    </script>
+    <!-- Supplier Delete  #################################################################- -->
 </body>
 
 </html>

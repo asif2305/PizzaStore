@@ -10,7 +10,7 @@ class DbQuery{
 		$connString =  $db->getConnstring();
 		$this->conn = $connString;
 	}
-	
+	#################################################################  Supplier Start
 	public function getSupplierList() {
 		$sql = 'SELECT * FROM "Supplier" order by "SupplierId"';
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
@@ -48,7 +48,22 @@ class DbQuery{
 		
 		
 	}
- 
+	public function deleteSupplierData($supplierId){
+
+		$sql="CALL sp_delete_only__supplier('$supplierId')";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		if($queryRecords){
+
+			echo '<script> alert("Data Deleted Successfully");</script>';
+			header('Location:baker.php');
+		}
+		else{
+			echo '<script> alert("Data Not Deleted Successfully");</script>';
+		}
+		
+		
+	}
+ #################################################################  Supplier End
  
     
 }
