@@ -12,7 +12,7 @@ class DbQuery{
 	}
 	
 	public function getSupplierList() {
-		$sql = 'SELECT * FROM "Supplier"';
+		$sql = 'SELECT * FROM "Supplier" order by "SupplierId"';
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 		$data = pg_fetch_all($queryRecords);
 		return $data;
@@ -32,8 +32,26 @@ class DbQuery{
 		
 		
 	}
+
+	public function updateSupplierData($supplierId,$suppliername, $supplieraddress,$visibility){
+
+		$sql="CALL sp_change_only_supplier('$supplierId','$suppliername', '$supplieraddress','$visibility')";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		if($queryRecords){
+
+			echo '<script> alert("Data Updated Successfully");</script>';
+			header('Location:baker.php');
+		}
+		else{
+			echo '<script> alert("Data Not Updated Successfully");</script>';
+		}
+		
+		
+	}
+ 
  
     
 }
+
 
 ?>

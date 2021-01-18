@@ -143,6 +143,9 @@ $emps = $newObj->getSupplierList();
 
                 </div>
 
+                <!-- Supplier Start #################################################################-->
+
+                <!-- Supplier Add  #################################################################- -->
 
 
                 <div class="modal fade" id="supplierModal" tabindex="-1" role="dialog"
@@ -226,10 +229,12 @@ $emps = $newObj->getSupplierList();
                                 <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Supplier ID</th>
                                             <th>Supplier Name</th>
                                             <th>Address</th>
                                             <th>Visibility</th>
-                                            <th>Action</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
 
                                         </tr>
                                     </thead>
@@ -243,8 +248,10 @@ $emps = $newObj->getSupplierList();
                                     <tbody>
                                         <?php foreach($emps as $key => $emp) :?>
                                         <tr>
+                                            <td><?php echo $emp['SupplierId'] ?></td>
                                             <td><?php echo $emp['Name'] ?></td>
                                             <td><?php echo $emp['Address'] ?></td>
+                                            <td style="display:none"><?php echo $emp['Visibility'] ?></td>
                                             <td><?php
                                             if( $emp['Visibility']=="1"){
                                                  echo "True";
@@ -256,10 +263,11 @@ $emps = $newObj->getSupplierList();
                                             </td>
                                             <td>
                                                 <div class="btn-group" data-toggle="buttons">
-                                                    <a href="baker.php?editID=<?php echo $emp['SupplierId'] ?>"
-                                                        target="_blank" class="btn btn-warning btn-xs">Edit</a>
-                                                    <a href="#" target="_blank" class="btn btn-danger btn-xs">Delete</a>
-                                                    <a href="#" target="_blank" class="btn btn-primary btn-xs">View</a>
+                                                    <button type="button"
+                                                        class="btn btn-warning btn-xs editSupplier">Edit</button>
+                                                    <button type="button"
+                                                        class="btn btn-warning btn-xs deleteSupplier">Delete</button>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -271,7 +279,61 @@ $emps = $newObj->getSupplierList();
                         </div>
                     </div>
                 </div>
+                <!-- Supplier Add  #################################################################- end-->
+                <!-- Supplier EDIT  #################################################################- START-->
+                <div class="modal fade" id="supplierEditModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Supplier</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="insertSupplier.php" method="POST">
+                                <div class="modal-body">
+                                    <h2 class="text-dark">Add Supplier </h2>
 
+                                    <div class="form-group">
+                                        <label for="Supplier ID">Supplier Id</label>
+                                        <input type="text" class="form-control" id="EditsupplierId"
+                                            name="EditsupplierId" readonly placeholder="Supplier Id">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Supplier Name">Supplier Name</label>
+                                        <input type="text" class="form-control" id="Editsuppliername"
+                                            name="Editsuppliername" placeholder="Supplier Name">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Supplier Name">Supplier Address</label>
+                                        <input type="text" class="form-control text-dark" id="Editsupplieraddress"
+                                            name="Editsupplieraddress" placeholder="Supplier Address">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Visibility">Visibility list:</label>
+                                        <select class="form-control" id="Editvisibility" name="Editvisibility">
+                                            <option value="1">True</option>
+                                            <option value="0">False</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" name="update_data" class="btn btn-primary">Update
+                                        Data</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Supplier EDIT  #################################################################- END-->
+                <!-- Supplier End  #################################################################- -->
 
 
                 <div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog"
@@ -406,78 +468,7 @@ $emps = $newObj->getSupplierList();
                                             <td>2012/04/09</td>
                                             <td>$138,575</td>
                                         </tr>
-                                        <tr>
-                                            <td>Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>$125,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>$115,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>$356,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>$103,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>$86,500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                        </tr>
+
                                         <tr>
                                             <td>Donna Snider</td>
                                             <td>Customer Support</td>
@@ -519,6 +510,28 @@ $emps = $newObj->getSupplierList();
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/datatables-demo.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('.editSupplier').on('click', function() {
+            $('#supplierEditModal').modal('show');
+
+            $tr = $(this).closest('tr');
+            var data = $tr.children('td').map(function() {
+                return $(this).text();
+            }).get();
+
+            console.log(data);
+            console.log(data[3]);
+
+            $('#EditsupplierId').val(data[0]);
+            $('#Editsuppliername').val(data[1]);
+            $('#Editsupplieraddress').val(data[2]);
+            $('#Editvisibility').val(data[3]);
+
+        });
+    });
+    </script>
 </body>
 
 </html>

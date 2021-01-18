@@ -12,4 +12,15 @@ if(isset($_POST['insert_data'])){
 }
 
 
+if(isset($_POST['update_data'])){
+    $supplierId=$_POST['EditsupplierId'];
+    $suppliername=$_POST['Editsuppliername'];
+    $supplieraddress=$_POST['Editsupplieraddress'];
+    $visibility=$_POST['Editvisibility'];
+
+    $emps = $connection->updateSupplierData($supplierId,$suppliername,$supplieraddress,$visibility);
+
+}
+
+
 ?>
