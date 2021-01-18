@@ -12,7 +12,7 @@ class DbQuery{
 	}
 	#################################################################  Supplier Start
 	public function getSupplierList() {
-		$sql = 'SELECT * FROM "Supplier" order by "SupplierId"';
+		$sql = 'SELECT * FROM "getall_supplierlist" ';
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 		$data = pg_fetch_all($queryRecords);
 		return $data;
@@ -64,6 +64,41 @@ class DbQuery{
 		
 	}
  #################################################################  Supplier End
+
+  #################################################################  Ingredient Start
+
+ public function getProvinceList() {
+	$sql = 'SELECT * FROM "get_all_regional_province" ';
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	$data = pg_fetch_all($queryRecords);
+	return $data;
+}
+
+public function getPizzaBakerData() {
+	$sql = 'SELECT * FROM "get_all_baker" ';
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	$data = pg_fetch_all($queryRecords);
+	return $data;
+}
+
+
+public function insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,$buyingQuantity,$availableQuantity,$Ingredient_visibility,$Province,$SupplierData,$bakerid){
+
+	$sql="CALL sp_add_price('$ingredientname', '$buyingPrice','$sellingPrice','$buyingQuantity','$availableQuantity','$Ingredient_visibility','$Province','$SupplierData','$bakerid')";
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	if($queryRecords){
+
+		echo '<script> alert("Data Saved Successfully");</script>';
+		header('Location:baker.php');
+	}
+	else{
+		echo '<script> alert("Data Not Saved Successfully");</script>';
+	}
+	
+	
+}
+
+ #################################################################  Ingredient End
  
     
 }
