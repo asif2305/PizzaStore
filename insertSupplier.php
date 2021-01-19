@@ -45,9 +45,35 @@ if(isset($_POST['Ingredient_Insert_data'])){
     $emps = $connection->insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,$buyingQuantity,$availableQuantity,$Ingredient_visibility,$Province,$SupplierData,$bakerid);
 
 }
+if(isset($_POST['Ingredient_Edit_data'])){
+    $EditingredientId=$_POST['EditingredientId'];
+    $EditPrice_Id=$_POST['EditPrice_Id'];
+    $EditProvince_Id=$_POST['EditProvince_Id'];
+    $SupplierData_Id=$_POST['EditSupplierData'];
+    $EditbuyingPrice=$_POST['EditbuyingPrice'];
+    $EditbuyingQuantity=$_POST['EditbuyingQuantity'];
+    $EditsellingPrice=$_POST['EditsellingPrice'];
+    $EditavailableQuantity=$_POST['EditavailableQuantity'];
+    $EditIngredient_visibility=$_POST['EditIngredient_visibility'];
+    $Editingredientname=$_POST['Editingredientname'];
+    $ItemId=$_POST['ItemId'];
+
+  
+
+    $emps = $connection->updateIngredientData($EditingredientId,$EditPrice_Id,$EditProvince_Id
+    ,$SupplierData_Id,$EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,
+    $EditIngredient_visibility,$Editingredientname,$ItemId);
+
+}
 
 
+if(isset($_POST['delete_Ingredient_data'])){
+    $deletesupplierItemId=$_POST['deletesupplierItemId'];
+    $deleteIngredientId=$_POST['deleteIngredientId'];
+    $deletePriceId=$_POST['deletePriceId'];
+    $emps = $connection->deleteIngredientData($deletesupplierItemId,$deleteIngredientId,$deletePriceId);
 
+}
 
 #################################################################  Ingredient End
 

@@ -98,6 +98,45 @@ public function insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,
 	
 }
 
+public function getingredientData() {
+	$sql = 'SELECT * FROM "ingredientdisplay" ';
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	$data = pg_fetch_all($queryRecords);
+	return $data;
+}
+
+public function updateIngredientData($EditingredientId,$EditPrice_Id,$EditProvince_Id,$SupplierData_Id,
+$EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$EditIngredient_visibility,$Editingredientname,$ItemId)
+	{
+		
+	$sql="CALL sp_change_price('$EditingredientId', '$EditPrice_Id','$EditProvince_Id','$SupplierData_Id','$EditbuyingPrice',
+	'$EditbuyingQuantity','$EditsellingPrice','$EditavailableQuantity','$EditIngredient_visibility','$Editingredientname','$ItemId')";
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	if($queryRecords){
+
+		echo '<script> alert("Data Saved Successfully");</script>';
+		header('Location:baker.php');
+	}
+	else{
+		echo '<script> alert("Data Not Saved Successfully");</script>';
+	}
+	}
+
+	public function deleteIngredientData($deletesupplierItemId,$deleteIngredientId,$deletePriceId){
+
+		$sql="CALL sp_delete_supplier_item('$deletesupplierItemId','$deleteIngredientId','$deletePriceId')";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		if($queryRecords){
+
+			echo '<script> alert("Data Deleted Successfully");</script>';
+			header('Location:baker.php');
+		}
+		else{
+			echo '<script> alert("Data Not Deleted Successfully");</script>';
+		}
+		
+		
+	}
  #################################################################  Ingredient End
  
     

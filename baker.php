@@ -4,6 +4,7 @@ $newObj = new DbQuery();
 $emps = $newObj->getSupplierList();
 $province=$newObj->getProvinceList();
 $pizza_baker=$newObj->getPizzaBakerData();
+$ingredientList=$newObj->getingredientData();
 ?>
 
 <?php include('header.php')?>
@@ -314,6 +315,7 @@ $pizza_baker=$newObj->getPizzaBakerData();
                     </div>
                     <div class="form-group">
                         <label for="BakerData">Baker:</label>
+
                         <?php if(is_array($pizza_baker)){?>
                         <?php foreach($pizza_baker as $key => $pizza_baker) :?>
                         <input type="text" class="form-control text-dark" id="bakerData" name="bakerData"
@@ -335,7 +337,7 @@ $pizza_baker=$newObj->getPizzaBakerData();
 
     </div>
 </div>
-
+<!-- Ingredient Calling Button  Start #################################################################- -->
 <div class="container">
     <div class="col-md-0 col-sm-12 text-left ftco-animate">
         <h3 class="mb-3 mt-5 bread text-dark">Add Ingredient</h3>
@@ -352,7 +354,9 @@ $pizza_baker=$newObj->getPizzaBakerData();
 
     </div>
 </div>
+<!-- Ingredient Calling Button  End #################################################################- -->
 <!-- Ingredient Create  End #################################################################- -->
+<!-- Ingredient List  Start #################################################################- -->
 <div>
 
     <div class="card mb-4">
@@ -365,49 +369,212 @@ $pizza_baker=$newObj->getPizzaBakerData();
                 <table class="table table-bordered" id="" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Ingredient Name</th>
+                            <th>Regional Province</th>
+                            <th>Supplier Name</th>
+                            <th>Buying Price</th>
+                            <th>Buying Quantity</th>
+                            <th>Selling Price</th>
+                            <th>Available Quantity</th>
+                            <th>Visibility</th>
+                            <th>Operations</th>
                         </tr>
                     </thead>
+
                     <tfoot>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Ingredient Name</th>
+                            <th>Regional Province</th>
+                            <th>Supplier Name</th>
+                            <th>Buying Price</th>
+                            <th>Buying Quantity</th>
+                            <th>Selling Price</th>
+                            <th>Available Quantity</th>
+                            <th>Visibility</th>
+                            <th>Operations</th>
                         </tr>
                     </tfoot>
                     <tbody>
-
+                        <?php if(is_array($ingredientList)){?>
+                        <?php foreach($ingredientList as $key => $ingredientList) :?>
                         <tr>
-                            <td>Serge Baldwin</td>
-                            <td>Data Coordinator</td>
-                            <td>Singapore</td>
-                            <td>64</td>
-                            <td>2012/04/09</td>
-                            <td>$138,575</td>
-                        </tr>
+                            <td style="display:none"><?php echo $ingredientList['IngredientId'] ?></td>
+                            <td style="display:none"><?php echo $ingredientList['Price_Id'] ?></td>
+                            <td style="display:none"><?php echo $ingredientList['ProvinceId'] ?></td>
+                            <td style="display:none"><?php echo $ingredientList['BakerName'] ?></td>
+                            <td style="display:none"><?php echo $ingredientList['SupplierId'] ?></td>
 
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                            <td>2011/01/25</td>
-                            <td>$112,000</td>
+
+                            <td><?php echo $ingredientList['IngredientName'] ?></td>
+                            <td><?php echo $ingredientList['ProvinceName'] ?></td>
+                            <td><?php echo $ingredientList['SupplierName'] ?></td>
+                            <td><?php echo $ingredientList['Buying_Price'] ?></td>
+                            <td><?php echo $ingredientList['Buying_Quantity'] ?></td>
+                            <td><?php echo $ingredientList['Selling_Price'] ?></td>
+                            <td><?php echo $ingredientList['Available_Quantity'] ?></td>
+                            <td style="display:none"><?php echo $ingredientList['Visibility'] ?></td>
+                            <td><?php
+                                            if( $ingredientList['Visibility']=="1"){
+                                                 echo "True";
+                                             }
+                                             else{
+                                                 echo "False";
+                                             }
+                                             ?>
+                            </td>
+                            <td style="display:none"><?php echo $ingredientList['ItemId'] ?></td>
+                            <td>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <button type="button" class="btn btn-warning btn-xs editIngredient">Edit</button>
+                                    <button type="button" class="btn btn-danger btn-xs deleteIngredient">Delete</button>
+
+                                </div>
+                            </td>
                         </tr>
+                        <?php endforeach; ?>
+                        <?php }?>
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+<!-- Ingredient List  End #################################################################- -->
+<!-- Ingredient EDIT  #################################################################- START-->
+<div class="modal fade" id="ingredientEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark" id="exampleModalLabel">Add Ingredient</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="insertSupplier.php" method="POST">
+                <div class="modal-body">
+                    <h2 class="text-dark">Add Ingredient</h2>
+
+
+                    <div class="form-group">
+
+                        <input type="text" style="display:none" id="EditingredientId" name="EditingredientId">
+                        <input type="text" style="display:none" id="EditPrice_Id" name="EditPrice_Id">
+                        <input type="text" style="display:none" id="ItemId" name="ItemId">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Ingredient Name">Ingredient Name</label>
+                        <input type="text" class="form-control" id="Editingredientname" name="Editingredientname"
+                            placeholder="Ingredient Name">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Buying Price">Buying Price</label>
+                        <input type="number" class="form-control text-dark" id="EditbuyingPrice" name="EditbuyingPrice"
+                            placeholder="Buying Price">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Buying Price">Selling Price</label>
+                        <input type="number" class="form-control text-dark" id="EditsellingPrice"
+                            name="EditsellingPrice" placeholder="Selling Price">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Buying Quantity">Buying Quantity</label>
+                        <input type="number" class="form-control text-dark" id="EditbuyingQuantity"
+                            name="EditbuyingQuantity" placeholder="Buying Quantity">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Available Quantity">Available Quantity</label>
+                        <input type="number" class="form-control text-dark" id="EditavailableQuantity"
+                            name="EditavailableQuantity" placeholder="Available Quantity">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Ingredient_visibility">Visibility list:</label>
+                        <select class="form-control" id="EditIngredient_visibility" name="EditIngredient_visibility">
+                            <option value="1">True</option>
+                            <option value="0">False</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Province">Regional Province:</label>
+                        <select class="form-control" id="EditProvince_Id" name="EditProvince_Id">
+                            <?php  $province=$newObj->getProvinceList();?>
+                            <?php if(is_array($province)){?>
+                            <?php foreach($province as $key => $province) :?>
+                            <option value=<?php echo $province['ProvinceId']?>> <?php echo $province['ProvinceName'] ?>
+                            </option>
+
+                            <?php endforeach; ?>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="EditSupplierData">Supplier:</label>
+                        <select class="form-control" id="EditSupplierData" name="EditSupplierData" readonly>
+                            <?php $emps = $newObj->getSupplierList();?>
+                            <?php if(is_array($emps)){?>
+                            <?php foreach($emps as $key => $emps) :?>
+                            <option value=<?php echo $emps['SupplierId']?>> <?php echo $emps['Name'] ?>
+                            </option>
+
+                            <?php endforeach; ?>
+                            <?php }?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Baker Name">Baker Name</label>
+                        <input type="text" class="form-control text-dark" id="BakerName" name="BakerName" readonly>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="Ingredient_Edit_data" class="btn btn-primary">Save Data</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Ingredient EDIT  #################################################################- END-->
+
+<!-- Ingredient DELETE #################################################################- START-->
+<div class="modal fade" id="deleteIngredientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark" id="exampleModalLabel">Delete Ingredient</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="insertSupplier.php" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" id="deletesupplierItemId" name="deletesupplierItemId">
+                    <input type="hidden" id="deleteIngredientId" name="deleteIngredientId">
+                    <input type="hidden" id="deletePriceId" name="deletePriceId">
+                    <h4>Do you want to Delete this Data ??</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                    <button type="submit" name="delete_Ingredient_data" class="btn btn-primary">Yes !! Delete
+                        it.</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- Ingredient DELETE  #################################################################- END-->
 <!-- Ingredient End  #################################################################- -->
 </main>
 <footer class="py-4 bg-light mt-auto">
@@ -462,7 +629,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
     $('.deleteSupplier').on('click', function() {
-        $('#deleteSupplierModal').modal('show');
+        $('#deleteIngredientModal').modal('show');
 
         $tr = $(this).closest('tr');
         var data = $tr.children('td').map(function() {
@@ -477,6 +644,57 @@ $(document).ready(function() {
 });
 </script>
 <!-- Supplier Delete  #################################################################- -->
+
+<!-- Ingredient Update  #################################################################- -->
+<script>
+$(document).ready(function() {
+    $('.editIngredient').on('click', function() {
+        $('#ingredientEditModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children('td').map(function() {
+            return $(this).text();
+        }).get();
+        console.log(data);
+
+        $('#EditingredientId').val(data[0]);
+        $('#EditPrice_Id').val(data[1]);
+        $('#EditProvince_Id').val(data[2]);
+        $('#BakerName').val(data[3]);
+        $('#EditSupplierData').val(data[4]);
+        $('#Editingredientname').val(data[5]);
+        $('#EditbuyingPrice').val(data[8]);
+        $('#EditbuyingQuantity').val(data[9]);
+        $('#EditsellingPrice').val(data[10]);
+        $('#EditavailableQuantity').val(data[11]);
+        $('#EditIngredient_visibility').val(data[12]);
+        $('#ItemId').val(data[14]);
+
+    });
+});
+</script>
+<!-- Ingredient Update  #################################################################- -->
+<!-- Ingredient Delete  #################################################################- -->
+<script>
+$(document).ready(function() {
+    $('.deleteIngredient').on('click', function() {
+        $('#deleteIngredientModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children('td').map(function() {
+            return $(this).text();
+        }).get();
+
+        $('#deletesupplierItemId').val(data[14]);
+        $('#deleteIngredientId').val(data[0]);
+        $('#deletePriceId').val(data[1]);
+
+
+    });
+});
+</script>
+
+
 </body>
 
 </html>
