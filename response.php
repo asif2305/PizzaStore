@@ -63,6 +63,23 @@ class DbQuery{
 		
 		
 	}
+	public function supplierNameDuplicateChecking($DuplicateChecking) {
+	
+		$sql = "SELECT * FROM totalRecords('$DuplicateChecking') ";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		
+		$data = pg_fetch_all($queryRecords);
+		//exit;
+		$response = array("status"=>"Yes");
+	
+		if(is_array($data)){
+				 $response = array("status"=>"No");
+		 
+		 }
+		 echo json_encode($response);
+	#die;
+	}
+
  #################################################################  Supplier End
 
   #################################################################  Ingredient Start

@@ -28,6 +28,13 @@ if(isset($_POST['delete_data'])){
 
 }
 
+if(isset($_POST['suppliernameDuplicateChecking'])){
+  
+    $DuplicateChecking=$_POST['suppliernameDuplicateChecking'];
+    $emps = $connection->supplierNameDuplicateChecking($DuplicateChecking);
+      
+}
+
 #################################################################  Supplier End
 #################################################################  Ingredient Start
 if(isset($_POST['Ingredient_Insert_data'])){

@@ -598,6 +598,7 @@ $ingredientList=$newObj->getingredientData();
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
 <script src="js/scripts.js"></script>
@@ -698,7 +699,43 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+$(document).ready(function() {
+    $("#suppliername").on("input", function() {
+        //  console.log($(this).val().trim());
+        // alert();
 
+        var suppliernameDuplicateChecking = $(this).val().trim();
+
+        if (suppliernameDuplicateChecking != '') {
+            // alert(suppliernameDuplicateChecking);
+            $.ajax({
+                url: 'insertSupplier.php',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {
+                    suppliernameDuplicateChecking: suppliernameDuplicateChecking
+                },
+                success: function(response) {
+                    console.log(response.status);
+                    if (response.status === "Yes") {
+                        $('#suppliername').val();
+                    } else {
+                        $("#suppliername").val("");
+                    }
+                    //  alert(response);
+
+                }
+            });
+        } else {
+            $("#suppliername").html("");
+        }
+
+
+    });
+
+});
+</script>
 </body>
 
 </html>
