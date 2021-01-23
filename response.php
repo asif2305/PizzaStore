@@ -154,6 +154,21 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 		
 		
 	}
+
+	public function restokeIngredientData($restokeprice_id,$restokebuyingprice,$restokebuyingquantity,$restokesellingprice,$restokeavailablequantity)
+		{
+			
+		$sql="CALL sp_restoke_price('$restokeprice_id', '$restokebuyingprice','$restokebuyingquantity','$restokesellingprice','$restokeavailablequantity')";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		if($queryRecords){
+	
+			echo '<script> alert("Data Saved Successfully");</script>';
+			header('Location:baker.php');
+		}
+		else{
+			echo '<script> alert("Data Not Saved Successfully");</script>';
+		}
+		}
  #################################################################  Ingredient End
  
     

@@ -72,6 +72,18 @@ if(isset($_POST['Ingredient_Edit_data'])){
     $EditIngredient_visibility,$Editingredientname,$ItemId);
 
 }
+if(isset($_POST['Ingredient_Restock_data'])){
+    $restokeprice_id=$_POST['RestockPrice_Id'];
+    $restokebuyingprice=$_POST['RestockbuyingPrice'];
+    $restokebuyingquantity=$_POST['RestockbuyingQuantity'];
+    $restokesellingprice=$_POST['RestocksellingPrice'];
+    $restokeavailablequantity=$_POST['RestokeavailableQuantity'];
+
+  
+
+    $emps = $connection->restokeIngredientData($restokeprice_id,$restokebuyingprice,$restokebuyingquantity,$restokesellingprice,$restokeavailablequantity);
+
+}
 
 
 if(isset($_POST['delete_Ingredient_data'])){
