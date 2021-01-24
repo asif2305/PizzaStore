@@ -6,8 +6,9 @@ if(isset($_POST['insert_data'])){
     $suppliername=$_POST['suppliername'];
     $supplieraddress=$_POST['supplieraddress'];
     $visibility=$_POST['visibility'];
+    $supplieridentificationno=$_POST['supplieridentificationno'];
 
-    $emps = $connection->insertSupplierData($suppliername,$supplieraddress,$visibility);
+    $emps = $connection->insertSupplierData($suppliername,$supplieraddress,$visibility,$supplieridentificationno);
 
 }
 
@@ -17,8 +18,9 @@ if(isset($_POST['update_data'])){
     $suppliername=$_POST['Editsuppliername'];
     $supplieraddress=$_POST['Editsupplieraddress'];
     $visibility=$_POST['Editvisibility'];
+    $identificationno=$_POST['Editsupplieridentificationno'];
 
-    $emps = $connection->updateSupplierData($supplierId,$suppliername,$supplieraddress,$visibility);
+    $emps = $connection->updateSupplierData($supplierId,$suppliername,$supplieraddress,$visibility,$identificationno);
 
 }
 
@@ -28,10 +30,10 @@ if(isset($_POST['delete_data'])){
 
 }
 
-if(isset($_POST['suppliernameDuplicateChecking'])){
+if(isset($_POST['supplieridentificationno'])){
   
-    $DuplicateChecking=$_POST['suppliernameDuplicateChecking'];
-    $emps = $connection->supplierNameDuplicateChecking($DuplicateChecking);
+    $DuplicateChecking=$_POST['supplieridentificationno'];
+    $emps = $connection->supplierIdentificationDuplicateChecking($DuplicateChecking);
       
 }
 

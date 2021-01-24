@@ -1,6 +1,7 @@
 <?php
 include("connection.php");
-class DbQuery{
+class DbQuery
+{
 
     protected $conn;
 	protected $data = array();
@@ -17,10 +18,10 @@ class DbQuery{
 		$data = pg_fetch_all($queryRecords);
 		return $data;
 	}
-	public function insertSupplierData($suppliername, $supplieraddress,$visibility){
+	public function insertSupplierData($suppliername, $supplieraddress,$visibility,$supplieridentificationno){
 
-		$sql="CALL sp_add_only_supplier('$suppliername', '$supplieraddress','$visibility')";
-		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		$sql="CALL sp_add_only_supplier('$suppliername', '$supplieraddress','$visibility','$supplieridentificationno')";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
 		if($queryRecords){
 
 			echo '<script> alert("Data Saved Successfully");</script>';
@@ -33,10 +34,10 @@ class DbQuery{
 		
 	}
 
-	public function updateSupplierData($supplierId,$suppliername, $supplieraddress,$visibility){
+	public function updateSupplierData($supplierId,$suppliername, $supplieraddress,$visibility,$identificationno){
 
-		$sql="CALL sp_change_only_supplier('$supplierId','$suppliername', '$supplieraddress','$visibility')";
-		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		$sql="CALL sp_change_only_supplier('$supplierId','$suppliername', '$supplieraddress','$visibility','$identificationno')";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch Supplier data");
 		if($queryRecords){
 
 			echo '<script> alert("Data Updated Successfully");</script>';
@@ -63,7 +64,7 @@ class DbQuery{
 		
 		
 	}
-	public function supplierNameDuplicateChecking($DuplicateChecking) {
+	public function supplierIdentificationDuplicateChecking($DuplicateChecking) {
 	
 		$sql = "SELECT * FROM totalRecords('$DuplicateChecking') ";
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
@@ -84,22 +85,24 @@ class DbQuery{
 
   #################################################################  Ingredient Start
 
- public function getProvinceList() {
+ public function getProvinceList() 
+ {
 	$sql = 'SELECT * FROM "get_all_regional_province" ';
 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 	$data = pg_fetch_all($queryRecords);
 	return $data;
-}
+ }
 
-public function getPizzaBakerData() {
+ public function getPizzaBakerData() {
 	$sql = 'SELECT * FROM "get_all_baker" ';
 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 	$data = pg_fetch_all($queryRecords);
 	return $data;
-}
+ } 
 
 
-public function insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,$buyingQuantity,$availableQuantity,$Ingredient_visibility,$Province,$SupplierData,$bakerid){
+public function insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,$buyingQuantity,$availableQuantity,$Ingredient_visibility,$Province,$SupplierData,$bakerid)
+ {
 
 	$sql="CALL sp_add_price('$ingredientname', '$buyingPrice','$sellingPrice','$buyingQuantity','$availableQuantity','$Ingredient_visibility','$Province','$SupplierData','$bakerid')";
 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
@@ -113,7 +116,7 @@ public function insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,
 	}
 	
 	
-}
+ }
 
 public function getingredientData() {
 	$sql = 'SELECT * FROM "ingredientdisplay" ';
@@ -139,7 +142,8 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 	}
 	}
 
-	public function deleteIngredientData($deletesupplierItemId,$deleteIngredientId,$deletePriceId){
+	public function deleteIngredientData($deletesupplierItemId,$deleteIngredientId,$deletePriceId)
+	{
 
 		$sql="CALL sp_delete_supplier_item('$deletesupplierItemId','$deleteIngredientId','$deletePriceId')";
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
@@ -170,9 +174,21 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 		}
 		}
  #################################################################  Ingredient End
- 
-    
+#################################################################  Order Start
+
+ public function getall_ingredientlistwithpriceandprovince() {
+	$sql = 'SELECT * FROM "getall_ingredientlistwithpriceandprovince" ';
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	$data = pg_fetch_all($queryRecords);
+	return $data;
 }
 
+#################################################################  Order End
+  
+}
+
+
+
+  
 
 ?>

@@ -46,6 +46,12 @@ $ingredientList=$newObj->getingredientData();
 
                         </div>
                         <div class="form-group col-md-6">
+                            <label for="Supplier Name">Supplier Identification No</label>
+                            <input type="text" class="form-control text-dark" id="supplieridentificationno"
+                                name="supplieridentificationno" placeholder="Supplier Identification No">
+
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="Visibility">Visibility list:</label>
                             <select class="form-control" id="visibility" name="visibility">
                                 <option value="1">True</option>
@@ -65,14 +71,14 @@ $ingredientList=$newObj->getingredientData();
     </div>
 </div>
 
-<div class="container">
+<!-- <div class="container">
     <div class="col-md-0 col-sm-12 text-left ftco-animate">
-        <h3 class="mb-3 mt-5 bread text-dark">Add Supplier</h3>
-        <!--  <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Menu</span></p> -->
+         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Menu</span></p>
     </div>
     <div class="jumbotron">
         <div class="card">
             <div class="card-body">
+                <h5 class="card-title">Adding Supplier</h5>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#supplierModal">
                     Add Supplier
                 </button>
@@ -80,11 +86,16 @@ $ingredientList=$newObj->getingredientData();
         </div>
 
     </div>
-</div>
+</div> -->
 
 <div>
 
     <div class="card mb-4">
+        <div class="card-title text-center">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#supplierModal">
+                Add Supplier
+            </button>
+        </div>
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
             Supplier List
@@ -92,6 +103,7 @@ $ingredientList=$newObj->getingredientData();
         </div>
 
         <div class="card-body">
+
             <div class="table-responsive">
                 <table class="table table-bordered" id="" width="100%" cellspacing="0">
                     <thead>
@@ -99,6 +111,7 @@ $ingredientList=$newObj->getingredientData();
                             <th>Supplier ID</th>
                             <th>Supplier Name</th>
                             <th>Address</th>
+                            <th>Identification Number</th>
                             <th>Visibility</th>
                             <th>Operations</th>
 
@@ -110,6 +123,7 @@ $ingredientList=$newObj->getingredientData();
                             <th>Supplier ID</th>
                             <th>Supplier Name</th>
                             <th>Address</th>
+                            <th>Identification Number</th>
                             <th>Visibility</th>
                             <th>Operations</th>
                         </tr>
@@ -121,6 +135,7 @@ $ingredientList=$newObj->getingredientData();
                             <td><?php echo $emp['SupplierId'] ?></td>
                             <td><?php echo $emp['Name'] ?></td>
                             <td><?php echo $emp['Address'] ?></td>
+                            <td><?php echo $emp['IdentificationNumber'] ?></td>
                             <td style="display:none"><?php echo $emp['Visibility'] ?></td>
                             <td><?php
                                             if( $emp['Visibility']=="1"){
@@ -178,6 +193,12 @@ $ingredientList=$newObj->getingredientData();
                             <label for="Supplier Name">Supplier Address</label>
                             <input type="text" class="form-control text-dark" id="Editsupplieraddress"
                                 name="Editsupplieraddress" placeholder="Supplier Address">
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Supplier Name">Supplier Identification No</label>
+                            <input type="text" class="form-control text-dark" id="Editsupplieridentificationno"
+                                name="Editsupplieridentificationno" placeholder="Supplier Identification No">
 
                         </div>
                         <div class="form-group col-md-6">
@@ -339,29 +360,35 @@ $ingredientList=$newObj->getingredientData();
 
     </div>
 </div>
-<!-- Ingredient Calling Button  Start #################################################################- -->
+<!-- Ingredient Calling Button  Start #################################################################- 
 <div class="container">
     <div class="col-md-0 col-sm-12 text-left ftco-animate">
         <h3 class="mb-3 mt-5 bread text-dark">Add Ingredient</h3>
-        <!--  <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Menu</span></p> -->
-    </div>
-    <div class="jumbotron">
-        <div class="card">
-            <div class="card-body">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ingredientModal">
-                    Add Ingredient
-                </button>
-            </div>
-        </div>
-
-    </div>
+         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Menu</span></p> 
 </div>
+<div class="jumbotron">
+    <div class="card">
+        <div class="card-body">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ingredientModal">
+                Add Ingredient
+            </button>
+        </div>
+    </div>
+
+</div>
+</div>
+-->
 <!-- Ingredient Calling Button  End #################################################################- -->
 <!-- Ingredient Create  End #################################################################- -->
 <!-- Ingredient List  Start #################################################################- -->
 <div>
 
     <div class="card mb-4">
+        <div class="card-title text-center">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#ingredientModal">
+                Add Ingredient
+            </button>
+        </div>
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
             Ingredient List
@@ -734,7 +761,8 @@ $(document).ready(function() {
         $('#EditsupplierId').val(data[0]);
         $('#Editsuppliername').val(data[1]);
         $('#Editsupplieraddress').val(data[2]);
-        $('#Editvisibility').val(data[3]);
+        $('#Editsupplieridentificationno').val(data[3]);
+        $('#Editvisibility').val(data[4]);
 
     });
 });
@@ -842,27 +870,28 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
-    $("#suppliername").on("input", function() {
+    $("#supplieridentificationno").on("input", function() {
         //  console.log($(this).val().trim());
         // alert();
 
-        var suppliernameDuplicateChecking = $(this).val().trim();
+        var supplieridentificationno = $(this).val().trim();
 
-        if (suppliernameDuplicateChecking != '') {
+        if (supplieridentificationno != '') {
             // alert(suppliernameDuplicateChecking);
             $.ajax({
                 url: 'insertSupplier.php',
                 method: 'POST',
                 dataType: 'JSON',
                 data: {
-                    suppliernameDuplicateChecking: suppliernameDuplicateChecking
+                    supplieridentificationno: supplieridentificationno
                 },
                 success: function(response) {
                     console.log(response.status);
                     if (response.status === "Yes") {
-                        $('#suppliername').val();
+                        $('#supplieridentificationno').val();
                     } else {
-                        $("#suppliername").val("");
+                        alert("Data already exists!!!");
+                        $("#supplieridentificationno").val("");
                     }
                     //  alert(response);
 
