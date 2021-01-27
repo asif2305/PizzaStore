@@ -97,6 +97,45 @@ if(isset($_POST['delete_Ingredient_data'])){
 }
 
 #################################################################  Ingredient End
+#################################################################  Order Start
+
+if(isset($_POST['insert_Order_data'])){
+   
+    $bakerid=$_POST['bakerid'];
+    $customerName=$_POST['customerName'];
+    $customerEmail=$_POST['customerEmail'];
+    $customerPhone=$_POST['customerPhone'];
+    $customerAddress=$_POST['customerAddress'];
+    $IngredientList=$_POST['IngredientList'];
+    $PizzaSize=$_POST['PizzaSize'];
+    $OrderStatudId=$_POST['OrderStatudId'];
+
+   
+    $emps = $connection->insertOrderData($bakerid,$customerName,$customerEmail,$customerPhone,$customerAddress,$IngredientList,$PizzaSize,$OrderStatudId);
+
+}
+
+if(isset($_POST['existing_Order_data']))
+{
+   
+    $existingbakerid=$_POST['existingbakerid'];
+    $existingOrderStatudId=$_POST['existingOrderStatudId'];
+    $existingIngredientListID=$_POST['existingIngredientListID'];
+    $existingcustomerName=$_POST['existingcustomerName'];
+    $existingcustomerEmail=$_POST['existingcustomerEmail'];
+    $existingcustomerPhone=$_POST['existingcustomerPhone'];
+    $existingcustomerAddress=$_POST['existingcustomerAddress'];
+    $existingPizzasize=$_POST['existingsize'];
+
+    print_r($existingIngredientListID);
+  $ingredientIds = array_map('intval', explode(',', $existingIngredientListID));
+
+  $emps = $connection->insertOrderData($existingbakerid,$existingcustomerName,$existingcustomerEmail,$existingcustomerPhone,$existingcustomerAddress,$ingredientIds,$existingPizzasize,$existingOrderStatudId);
+
+}
+
+#################################################################  Order End
+
 
 
 

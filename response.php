@@ -59,6 +59,7 @@ class DbQuery
 			header('Location:baker.php');
 		}
 		else{
+			
 			echo '<script> alert("Data Not Deleted Successfully");</script>';
 		}
 		
@@ -182,8 +183,49 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 	$data = pg_fetch_all($queryRecords);
 	return $data;
 }
+public function insertOrderData($bakerid,$customerName,$customerEmail,$customerPhone,$customerAddress,$IngredientList,$PizzaSize,$OrderStatudId)
+		{
+			$PrizaName="Italian";
+			
+		$sql="CALL sp_add_customer('$customerName', '$customerEmail','$customerPhone','$customerAddress','$bakerid','$PrizaName','$PizzaSize','$OrderStatudId')";
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
+	
+		if($queryRecords){
+			if (is_array($IngredientList) || is_object($IngredientList))
+			{
+				foreach($IngredientList as $row)
+				{
+					$IngredientId=$row;
+					$sql="CALL sp_add_IngredientList('$IngredientId')";
 
-#################################################################  Order End
+					$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
+				
+				}
+				
+				if($queryRecords){
+				
+					echo '<script> alert("Data Saved Successfully");</script>';
+					header('Location:order.php');
+				}
+				else{
+					echo '<script> alert("Data Not Saved Successfully");</script>';
+				}
+					
+		
+			}
+
+		}
+		
+   }
+   public function get_order_list() {
+	$sql = 'SELECT * FROM "get_order_list" ';
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch Customer data");
+	$data = pg_fetch_all($queryRecords);
+	return $data;
+ } 
+
+
+	#################################################################  Order End
   
 }
 
