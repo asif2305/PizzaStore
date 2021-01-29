@@ -5,11 +5,18 @@ $emps = $newObj->getSupplierList();
 $province=$newObj->getProvinceList();
 $pizza_baker=$newObj->getPizzaBakerData();
 $ingredientList=$newObj->getingredientData();
+$OrderDataList=$newObj->get_order_list();
+$suppliervisibility=$newObj->getall_Visible_supplier();
+
 ?>
 
 <?php include('header.php')?>
 
 
+<?php include('Baker/orderList.php')?>
+
+
+<?php include('Baker/processOrder.php')?>
 
 <?php include('Baker/createSupplier.php')?>
 
@@ -24,6 +31,8 @@ $ingredientList=$newObj->getingredientData();
 <?php include('Baker/ingredientList.php')?>
 
 <?php include('Baker/ingredientEdit.php')?>
+<?php include('Baker/ingredientVisibilityChecking.php')?>
+
 
 <?php include('Baker/ingredientRestoke.php')?>
 
@@ -106,8 +115,8 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
     $('.editIngredient').on('click', function() {
-        $('#ingredientEditModal').modal('show');
 
+        // editIngredient
         $tr = $(this).closest('tr');
         var data = $tr.children('td').map(function() {
             return $(this).text();
@@ -126,6 +135,17 @@ $(document).ready(function() {
         $('#EditavailableQuantity').val(data[11]);
         $('#EditIngredient_visibility').val(data[12]);
         $('#ItemId').val(data[14]);
+        $('#SupplierVisibility').val(data[15]);
+        $('#CheckingVisibilityingredientId').val(data[0]);
+        $('#SupplierVisibility').val(data[15]);
+
+        if (data[15] == 1) {
+            $('#ingredientEditModal').modal('show');
+        } else {
+
+            $('#changeVisibilityModal').modal('show');
+        }
+
 
     });
 });
@@ -155,26 +175,31 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
     $('.restokeIngredient').on('click', function() {
-        $('#ingredientRestokeModal').modal('show');
+
 
         $tr = $(this).closest('tr');
         var data = $tr.children('td').map(function() {
             return $(this).text();
         }).get();
-        console.log(data);
-        console.log('asif ');
+
         $('#RestokeingredientId').val(data[0]);
         $('#RestockPrice_Id').val(data[1]);
         $('#RestokeProvince_Id').val(data[2]);
         $('#RestokeBakerName').val(data[3]);
         $('#RestokeSupplierData').val(data[4]);
         $('#Restockingredientname').val(data[5]);
-        // $('#EditbuyingPrice').val(data[8]);
-        //$('#EditbuyingQuantity').val(data[9]);
-        //$('#EditsellingPrice').val(data[10]);
         $('#RestokeavailableQuantity').val(data[11]);
         $('#RestokeIngredient_visibility').val(data[12]);
         $('#RestokeItemId').val(data[14]);
+        $('#CheckingVisibilityingredientId').val(data[0]);
+        $('#SupplierVisibility').val(data[15]);
+
+        if (data[15] == 1) {
+            $('#ingredientRestokeModal').modal('show');
+        } else {
+
+            $('#changeVisibilityModal').modal('show');
+        }
 
     });
 });
@@ -219,6 +244,23 @@ $(document).ready(function() {
 
 });
 </script>
+<script>
+$(document).ready(function() {
+    $('.processOrder').on('click', function() {
+        $('#ProcessOrderModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children('td').map(function() {
+            return $(this).text();
+        }).get();
+
+        $('#processOrderId').val(data[2]);
+        console.log(data[2]);
+    });
+
+});
+</script>
+
 </body>
 
 </html>

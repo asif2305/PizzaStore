@@ -54,24 +54,39 @@ if(isset($_POST['Ingredient_Insert_data'])){
     $emps = $connection->insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,$buyingQuantity,$availableQuantity,$Ingredient_visibility,$Province,$SupplierData,$bakerid);
 
 }
+
+if(isset($_POST['Ingredient_Visibility_Status_data'])){
+    $SupplierVisibility=$_POST['SupplierVisibility'];
+    $CheckingVisibilityingredientId=$_POST['CheckingVisibilityingredientId'];
+
+    if($SupplierVisibility==0){
+        
+    $emps = $connection->updateIngredientVisibilityData($CheckingVisibilityingredientId,$SupplierVisibility);
+    }
+
+}
+
 if(isset($_POST['Ingredient_Edit_data'])){
-    $EditingredientId=$_POST['EditingredientId'];
-    $EditPrice_Id=$_POST['EditPrice_Id'];
-    $EditProvince_Id=$_POST['EditProvince_Id'];
-    $SupplierData_Id=$_POST['EditSupplierData'];
-    $EditbuyingPrice=$_POST['EditbuyingPrice'];
-    $EditbuyingQuantity=$_POST['EditbuyingQuantity'];
-    $EditsellingPrice=$_POST['EditsellingPrice'];
-    $EditavailableQuantity=$_POST['EditavailableQuantity'];
-    $EditIngredient_visibility=$_POST['EditIngredient_visibility'];
-    $Editingredientname=$_POST['Editingredientname'];
-    $ItemId=$_POST['ItemId'];
+   
+        $EditingredientId=$_POST['EditingredientId'];
+        $EditPrice_Id=$_POST['EditPrice_Id'];
+        $EditProvince_Id=$_POST['EditProvince_Id'];
+        $SupplierData_Id=$_POST['EditSupplierData'];
+        $EditbuyingPrice=$_POST['EditbuyingPrice'];
+        $EditbuyingQuantity=$_POST['EditbuyingQuantity'];
+        $EditsellingPrice=$_POST['EditsellingPrice'];
+        $EditavailableQuantity=$_POST['EditavailableQuantity'];
+        $EditIngredient_visibility=$_POST['EditIngredient_visibility'];
+        $Editingredientname=$_POST['Editingredientname'];
+        $ItemId=$_POST['ItemId'];
+    
+      
+    
+        $emps = $connection->updateIngredientData($EditingredientId,$EditPrice_Id,$EditProvince_Id
+        ,$SupplierData_Id,$EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,
+        $EditIngredient_visibility,$Editingredientname,$ItemId);
+    
 
-  
-
-    $emps = $connection->updateIngredientData($EditingredientId,$EditPrice_Id,$EditProvince_Id
-    ,$SupplierData_Id,$EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,
-    $EditIngredient_visibility,$Editingredientname,$ItemId);
 
 }
 if(isset($_POST['Ingredient_Restock_data'])){
@@ -133,6 +148,15 @@ if(isset($_POST['existing_Order_data']))
   $emps = $connection->insertOrderData($existingbakerid,$existingcustomerName,$existingcustomerEmail,$existingcustomerPhone,$existingcustomerAddress,$ingredientIds,$existingPizzasize,$existingOrderStatudId);
 
 }
+
+
+if(isset($_POST['process_order_data'])){
+    
+    $processOrderId=$_POST['processOrderId'];
+    $emps = $connection->processOrder($processOrderId);
+
+}
+
 
 #################################################################  Order End
 

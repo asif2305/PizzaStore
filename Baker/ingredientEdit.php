@@ -74,7 +74,7 @@
                         <div class="form-group  col-md-4">
                             <label for="EditSupplierData">Supplier:</label>
                             <select class="form-control" id="EditSupplierData" name="EditSupplierData" readonly>
-                                <?php $emps = $newObj->getSupplierList();?>
+                                <?php $emps = $newObj->getall_Visible_supplier();?>
                                 <?php if(is_array($emps)){?>
                                 <?php foreach($emps as $key => $emps) :?>
                                 <option value=<?php echo $emps['SupplierId']?>> <?php echo $emps['Name'] ?>

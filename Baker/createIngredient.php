@@ -21,31 +21,31 @@
                         <div class="form-group col-md-4">
                             <label for="Ingredient Name">Ingredient Name</label>
                             <input type="text" class="form-control" id="ingredientname" name="ingredientname"
-                                placeholder="Ingredient Name">
+                                placeholder="Ingredient Name" required>
 
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Buying Price">Buying Price</label>
                             <input type="number" class="form-control text-dark" id="buyingPrice" name="buyingPrice"
-                                placeholder="Buying Price" min="0">
+                                placeholder="Buying Price" min="0" required>
 
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Buying Price">Selling Price</label>
                             <input type="number" class="form-control text-dark" id="sellingPrice" name="sellingPrice"
-                                placeholder="Selling Price" min="0">
+                                placeholder="Selling Price" min="0" required>
 
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Buying Quantity">Buying Quantity</label>
                             <input type="number" class="form-control text-dark" id="buyingQuantity"
-                                name="buyingQuantity" placeholder="Buying Quantity" min="0">
+                                name="buyingQuantity" placeholder="Buying Quantity" min="0" required>
 
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Available Quantity">Available Quantity</label>
                             <input type="number" class="form-control text-dark" id="availableQuantity"
-                                name="availableQuantity" placeholder="Available Quantity" min="0">
+                                name="availableQuantity" placeholder="Available Quantity" min="0" required>
 
                         </div>
                         <div class="form-group col-md-4">
@@ -71,9 +71,10 @@
                         <div class="form-group col-md-4">
                             <label for="SupplierData">Supplier:</label>
                             <select class="form-control" id="SupplierData" name="SupplierData">
-                                <?php if(is_array($emps)){?>
-                                <?php foreach($emps as $key => $emps) :?>
-                                <option value=<?php echo $emps['SupplierId']?>> <?php echo $emps['Name'] ?>
+                                <?php if(is_array($suppliervisibility)){?>
+                                <?php foreach($suppliervisibility as $key => $suppliervisibility) :?>
+                                <option value=<?php echo $suppliervisibility['SupplierId']?>>
+                                    <?php echo $suppliervisibility['Name'] ?>
                                 </option>
 
                                 <?php endforeach; ?>

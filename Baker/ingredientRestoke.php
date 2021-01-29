@@ -28,19 +28,19 @@
                         <div class="form-group  col-md-4">
                             <label for="Buying Price">Buying Price</label>
                             <input type="number" class="form-control text-dark" id="RestockbuyingPrice"
-                                name="RestockbuyingPrice" placeholder="Buying Price" min="0">
+                                name="RestockbuyingPrice" placeholder="Buying Price" min="0" required>
 
                         </div>
                         <div class="form-group  col-md-4">
                             <label for="Buying Price">Selling Price</label>
                             <input type="number" class="form-control text-dark" id="RestocksellingPrice"
-                                name="RestocksellingPrice" placeholder="Selling Price" min="0">
+                                name="RestocksellingPrice" placeholder="Selling Price" min="0" required>
 
                         </div>
                         <div class="form-group  col-md-4">
                             <label for="Buying Quantity">Buying Quantity</label>
                             <input type="number" class="form-control text-dark" id="RestockbuyingQuantity"
-                                name="RestockbuyingQuantity" placeholder="Buying Quantity" min="0">
+                                name="RestockbuyingQuantity" placeholder="Buying Quantity" min="0" required>
 
                         </div>
                         <div class="form-group  col-md-4">

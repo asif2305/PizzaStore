@@ -20,19 +20,19 @@
                         <div class="form-group col-md-6 ">
                             <label for="Supplier Name">Supplier Name</label>
                             <input type="text" class="form-control" id="suppliername" name="suppliername"
-                                placeholder="Supplier Name">
+                                placeholder="Supplier Name" required>
 
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Supplier Name">Supplier Address</label>
                             <input type="text" class="form-control text-dark" id="supplieraddress"
-                                name="supplieraddress" placeholder="Supplier Address">
+                                name="supplieraddress" placeholder="Supplier Address" required>
 
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Supplier Name">Supplier Identification No</label>
                             <input type="text" class="form-control text-dark" id="supplieridentificationno"
-                                name="supplieridentificationno" placeholder="Supplier Identification No">
+                                name="supplieridentificationno" placeholder="Supplier Identification No" required>
 
                         </div>
                         <div class="form-group col-md-6">

@@ -18,17 +18,22 @@ class DbQuery
 		$data = pg_fetch_all($queryRecords);
 		return $data;
 	}
+	public function getall_Visible_supplier() {
+		$sql = 'SELECT * FROM getall_Visible_supplier ';
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		$data = pg_fetch_all($queryRecords);
+		return $data;
+	}
+	
 	public function insertSupplierData($suppliername, $supplieraddress,$visibility,$supplieridentificationno){
 
 		$sql="CALL sp_add_only_supplier('$suppliername', '$supplieraddress','$visibility','$supplieridentificationno')";
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
 		if($queryRecords){
-
-			echo '<script> alert("Data Saved Successfully");</script>';
-			header('Location:baker.php');
+			echo "<script>alert('Supplier Data Saved Successfully');document.location='baker.php'</script>";
 		}
 		else{
-			echo '<script> alert("Data Not Saved Successfully");</script>';
+			echo "<script>alert(' Supplier Data Not Saved Successfully');document.location='baker.php'</script>";
 		}
 		
 		
@@ -40,11 +45,10 @@ class DbQuery
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch Supplier data");
 		if($queryRecords){
 
-			echo '<script> alert("Data Updated Successfully");</script>';
-			header('Location:baker.php');
+			echo "<script>alert('Supplier Data Updated Successfully');document.location='baker.php'</script>";
 		}
 		else{
-			echo '<script> alert("Data Not Updated Successfully");</script>';
+			echo "<script>alert('Supplier Data Not Updated Successfully');document.location='baker.php'</script>";
 		}
 		
 		
@@ -55,12 +59,11 @@ class DbQuery
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 		if($queryRecords){
 
-			echo '<script> alert("Data Deleted Successfully");</script>';
-			header('Location:baker.php');
+			echo "<script>alert('Supplier Data Deleted Successfully');document.location='baker.php'</script>";
 		}
 		else{
 			
-			echo '<script> alert("Data Not Deleted Successfully");</script>';
+			echo "<script>alert('Supplier Data Not Deleted Successfully');document.location='baker.php'</script>";
 		}
 		
 		
@@ -68,7 +71,7 @@ class DbQuery
 	public function supplierIdentificationDuplicateChecking($DuplicateChecking) {
 	
 		$sql = "SELECT * FROM totalRecords('$DuplicateChecking') ";
-		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
 		
 		$data = pg_fetch_all($queryRecords);
 		//exit;
@@ -109,11 +112,11 @@ public function insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,
 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 	if($queryRecords){
 
-		echo '<script> alert("Data Saved Successfully");</script>';
-		header('Location:baker.php');
+		echo "<script>alert('Ingredient Data Saved Successfully');document.location='baker.php'</script>";
+
 	}
 	else{
-		echo '<script> alert("Data Not Saved Successfully");</script>';
+		echo "<script>alert('Ingredient Data Not Saved Successfully');document.location='baker.php'</script>";
 	}
 	
 	
@@ -135,13 +138,27 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 	if($queryRecords){
 
-		echo '<script> alert("Data Saved Successfully");</script>';
-		header('Location:baker.php');
+		echo "<script>alert('Ingredient Data Updated Successfully');document.location='baker.php'</script>";
 	}
 	else{
-		echo '<script> alert("Data Not Saved Successfully");</script>';
+		echo "<script>alert('Ingredient Data Not Updated Successfully');document.location='baker.php'</script>";
 	}
 	}
+	public function updateIngredientVisibilityData($EditingredientId,$SupplierVisibility)
+	{
+		
+	$sql="CALL sp_change_ingrdient_visibility('$EditingredientId', '$SupplierVisibility')";
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch ingredient data");
+	if($queryRecords){
+
+		echo "<script>alert('Ingredient Visibility Status Updated Successfully');document.location='baker.php'</script>";
+	}
+	else{
+		echo "<script>alert('Ingredient Visibility Status Not Updated Successfully');document.location='baker.php'</script>";
+	}
+	}
+
+	
 
 	public function deleteIngredientData($deletesupplierItemId,$deleteIngredientId,$deletePriceId)
 	{
@@ -224,7 +241,25 @@ public function insertOrderData($bakerid,$customerName,$customerEmail,$customerP
 	return $data;
  } 
 
+ 
+ public function processOrder($processOrderId)
+ {
+     $process=1;
+	 $sql="CALL sp_process_order('$processOrderId','$process')";
+	 $queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	 if($queryRecords){
 
+		 echo '<script> alert("Data Processed Successfully");</script>';
+		
+		 header('Location:baker.php');
+	 }
+	 else{
+		 echo '<script> alert("Data Not Deleted Successfully");</script>';
+	 }
+	 
+	 
+ }
+ 
 	#################################################################  Order End
   
 }

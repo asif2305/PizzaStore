@@ -69,6 +69,7 @@
                                              ?>
                             </td>
                             <td style="display:none"><?php echo $ingredientList['ItemId'] ?></td>
+                            <td style="display:none"><?php echo $ingredientList['SupplierVisibility'] ?></td>
                             <td>
                                 <div class="btn-group" data-toggle="buttons">
                                     <button type="button" class="btn btn-warning btn-xs editIngredient"><i
