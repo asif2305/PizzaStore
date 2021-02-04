@@ -62,7 +62,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Supplier Name">Pizza Size</label>
-                            <input type="number" class="form-control text-dark" id="PizzaSize" name="PizzaSize"
+                            <input type="text" class="form-control text-dark" id="PizzaSize" name="PizzaSize"
                                 placeholder="Pizza Size" required>
 
                         </div>
