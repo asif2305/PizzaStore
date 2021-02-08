@@ -1,3 +1,4 @@
+<!-- This ingredientVisibilityChecking.php is developed by Asif Ahmed and Matrikel-Nr:509701 -->
 <div class="modal fade" id="changeVisibilityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">

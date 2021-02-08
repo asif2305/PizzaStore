@@ -1,3 +1,4 @@
+<!-- This response.php is developed by Asif Ahmed and Matrikel-Nr:509701 -->
 <?php
 include("connection.php");
 class DbQuery

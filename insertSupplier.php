@@ -1,3 +1,4 @@
+<!-- This insertSupplier.php is developed by Md. Mahfujur Rahman and Matrikel-Nr:613925 -->
 <?php 
 include('response.php');
 $connection = new DbQuery();

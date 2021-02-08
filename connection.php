@@ -1,3 +1,4 @@
+<!-- This connection.php is developed by Md. Mahfujur Rahman and Matrikel-Nr:613925 -->
 <?php
 Class dbObj{
 	/* Database connection start */
