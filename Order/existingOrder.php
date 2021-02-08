@@ -15,6 +15,7 @@
                         <input type="hidden" id="existingbakerid" name="existingbakerid">
                         <input type="hidden" id="existingOrderStatudId" name="existingOrderStatudId" value="0">
                         <input type="hidden" id="existingIngredientListID" name="existingIngredientListID">
+                        <input type="hidden" id="existingSizeId" name="existingSizeId">
 
 
                         <div class="form-group  col-md-6">
@@ -49,7 +50,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="Supplier Name">Pizza Size</label>
+                            <label for="Supplier Name">Base Pizza</label>
                             <input type="text" class="form-control text-dark" id="existingsize" name="existingsize"
                                 readonly="readonly">
 

@@ -38,6 +38,7 @@ $suppliervisibility=$newObj->getall_Visible_supplier();
 
 <?php include('Baker/ingredientDelete.php')?>
 
+<?php include('Baker/supplierVisibility.php')?>
 </main>
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid">
@@ -228,10 +229,10 @@ $(document).ready(function() {
                     if (response.status === "Yes") {
                         $('#supplieridentificationno').val();
                     } else {
-                        //  alert("Data already exists!!!");
+                        alert("Data already exists!!!");
                         // $("#supplieridentificationno").val("");
                     }
-                    //  alert(response);
+                    alert(response);
 
                 }
             });
@@ -244,6 +245,63 @@ $(document).ready(function() {
 
 });
 </script>
+<!-- Hide and show #################################################################- -->
+<script>
+$(document).ready(function() {
+    $('.editSupplier').on('click', function() {
+        $('#supplierEditModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children('td').map(function() {
+            return $(this).text();
+        }).get();
+
+        $('#EditsupplierId').val(data[0]);
+        $('#Editsuppliername').val(data[1]);
+        $('#Editsupplieraddress').val(data[2]);
+        $('#Editsupplieridentificationno').val(data[3]);
+        $('#Editvisibility').val(data[4]);
+
+    });
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('.ShowOrHideSupplier').on('click', function() {
+        $('#ShowOrHideSupplierModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children('td').map(function() {
+            return $(this).text();
+        }).get();
+
+        $('#ShowHidesupplierId').val(data[0]);
+
+
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    $('.ShowOrHideIngredient').on('click', function() {
+        $('#changeVisibilityModal').modal('show');
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children('td').map(function() {
+            return $(this).text();
+        }).get();
+
+        $('#CheckingVisibilityingredientId').val(data[0]);
+        $('#SupplierVisibility').val(data[15]);
+
+
+
+    });
+});
+</script>
+
+
 <script>
 $(document).ready(function() {
     $('.processOrder').on('click', function() {

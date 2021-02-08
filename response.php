@@ -68,22 +68,22 @@ class DbQuery
 		
 		
 	}
-	public function supplierIdentificationDuplicateChecking($DuplicateChecking) {
+	// public function supplierIdentificationDuplicateChecking($DuplicateChecking) {
 	
-		$sql = "SELECT * FROM totalRecords('$DuplicateChecking') ";
-		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
+	// 	$sql = "SELECT * FROM totalRecords('$DuplicateChecking') ";
+	// 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
 		
-		$data = pg_fetch_all($queryRecords);
-		//exit;
-		$response = array("status"=>"Yes");
+	// 	$data = pg_fetch_all($queryRecords);
+	// 	//exit;
+	// 	$response = array("status"=>"Yes");
 	
-		if(is_array($data)){
-				 $response = array("status"=>"No");
+	// 	if(is_array($data)){
+	// 			 $response = array("status"=>"No");
 		 
-		 }
-		 echo json_encode($response);
-	#die;
-	}
+	// 	 }
+	// 	 echo json_encode($response);
+	// #die;
+	// }
 
  #################################################################  Supplier End
 
@@ -157,6 +157,19 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 		echo "<script>alert('Ingredient Visibility Status Not Updated Successfully');document.location='baker.php'</script>";
 	}
 	}
+	public function updateSupplierVisibilityData($ShowHidesupplierId)
+	{
+		
+	$sql="CALL sp_change_Supplier_visibility('$ShowHidesupplierId')";
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch ingredient data");
+	if($queryRecords){
+
+		echo "<script>alert('Supplier Visibility Status Updated Successfully');document.location='baker.php'</script>";
+	}
+	else{
+		echo "<script>alert('Supplier Visibility Status Not Updated Successfully');document.location='baker.php'</script>";
+	}
+	}
 
 	
 
@@ -181,7 +194,7 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 		{
 			
 		$sql="CALL sp_restoke_price('$restokeprice_id', '$restokebuyingprice','$restokebuyingquantity','$restokesellingprice','$restokeavailablequantity')";
-		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
 		if($queryRecords){
 	
 			echo '<script> alert("Data Saved Successfully");</script>';
@@ -196,16 +209,50 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 
  public function getall_ingredientlistwithpriceandprovince() {
 	$sql = 'SELECT * FROM "getall_ingredientlistwithpriceandprovince" ';
-	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
 	$data = pg_fetch_all($queryRecords);
 	return $data;
 }
-public function insertOrderData($bakerid,$customerName,$customerEmail,$customerPhone,$customerAddress,$IngredientList,$PizzaSize,$OrderStatudId)
+
+public function getall_PizzaSize() {
+	$sql = 'SELECT * FROM getall_PizzaSize ';
+	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
+	$data = pg_fetch_all($queryRecords);
+	return $data;
+}
+
+public function insertOrderData($bakerid,$customerName,$customerEmail,$customerPhone,$customerAddress,$IngredientList,$SizeId,$OrderStatudId)
 		{
-			$PrizaName="Italian";
+			#$PrizaName="Italian";
+     
+			$checkingData=False;
+
+			if (is_array($IngredientList) || is_object($IngredientList))
+					{
+						foreach($IngredientList as $row)
+						{
+							$IngredientId=$row;
+							$sql="select * from totalingrdientAvaiabilityQutatity('$IngredientId')";
+							$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
+							$data = pg_fetch_all($queryRecords);
+							
+							if(!is_array($data)){
+									echo "<script> alert('No Ingredient is Available for a new Order.');document.location='order.php'</script>";
+	
+								exit;
+							}
+							else{
+								$checkingData=True;
+							}
+						
+						}
 			
-		$sql="CALL sp_add_customer('$customerName', '$customerEmail','$customerPhone','$customerAddress','$bakerid','$PrizaName','$PizzaSize','$OrderStatudId')";
-		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
+		
+					}
+		
+		if($checkingData){
+			$sql="CALL sp_add_customer('$customerName', '$customerEmail','$customerPhone','$customerAddress','$bakerid','$SizeId','$OrderStatudId')";
+	     	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
 	
 		if($queryRecords){
 			if (is_array($IngredientList) || is_object($IngredientList))
@@ -230,6 +277,7 @@ public function insertOrderData($bakerid,$customerName,$customerEmail,$customerP
 					
 		
 			}
+		}
 
 		}
 		

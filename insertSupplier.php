@@ -54,15 +54,21 @@ if(isset($_POST['Ingredient_Insert_data'])){
     $emps = $connection->insertIngredientData($ingredientname,$buyingPrice,$sellingPrice,$buyingQuantity,$availableQuantity,$Ingredient_visibility,$Province,$SupplierData,$bakerid);
 
 }
+# Supplier Show and Hide
+if(isset($_POST['Supplier_Visibility_Status_data'])){
+    $ShowHidesupplierId=$_POST['ShowHidesupplierId'];
+       
+    $emps = $connection->updateSupplierVisibilityData($ShowHidesupplierId);
 
+}
 if(isset($_POST['Ingredient_Visibility_Status_data'])){
     $SupplierVisibility=$_POST['SupplierVisibility'];
     $CheckingVisibilityingredientId=$_POST['CheckingVisibilityingredientId'];
 
-    if($SupplierVisibility==0){
+    #if($SupplierVisibility==0){
         
     $emps = $connection->updateIngredientVisibilityData($CheckingVisibilityingredientId,$SupplierVisibility);
-    }
+   # }
 
 }
 
@@ -122,11 +128,12 @@ if(isset($_POST['insert_Order_data'])){
     $customerPhone=$_POST['customerPhone'];
     $customerAddress=$_POST['customerAddress'];
     $IngredientList=$_POST['IngredientList'];
-    $PizzaSize=$_POST['PizzaSize'];
+   // $PizzaSize=$_POST['PizzaSize'];
     $OrderStatudId=$_POST['OrderStatudId'];
-
+    $SizeId=$_POST['BasePriceId'];
+ 
    
-    $emps = $connection->insertOrderData($bakerid,$customerName,$customerEmail,$customerPhone,$customerAddress,$IngredientList,$PizzaSize,$OrderStatudId);
+    $emps = $connection->insertOrderData($bakerid,$customerName,$customerEmail,$customerPhone,$customerAddress,$IngredientList,$SizeId,$OrderStatudId);
 
 }
 
@@ -140,12 +147,11 @@ if(isset($_POST['existing_Order_data']))
     $existingcustomerEmail=$_POST['existingcustomerEmail'];
     $existingcustomerPhone=$_POST['existingcustomerPhone'];
     $existingcustomerAddress=$_POST['existingcustomerAddress'];
-    $existingPizzasize=$_POST['existingsize'];
+    $existingSizeId=$_POST['existingSizeId'];
 
-    print_r($existingIngredientListID);
   $ingredientIds = array_map('intval', explode(',', $existingIngredientListID));
 
-  $emps = $connection->insertOrderData($existingbakerid,$existingcustomerName,$existingcustomerEmail,$existingcustomerPhone,$existingcustomerAddress,$ingredientIds,$existingPizzasize,$existingOrderStatudId);
+  $emps = $connection->insertOrderData($existingbakerid,$existingcustomerName,$existingcustomerEmail,$existingcustomerPhone,$existingcustomerAddress,$ingredientIds,$existingSizeId,$existingOrderStatudId);
 
 }
 

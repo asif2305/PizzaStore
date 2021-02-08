@@ -44,8 +44,8 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Ingredient List ">Ingredient List:</label>
-                            <select class="form-control" id="IngredientList" name="IngredientList[]"
-                                multiple="multiple">
+                            <select class="form-control" id="IngredientList" name="IngredientList[]" multiple="multiple"
+                                required>
 
                                 <?php if(is_array($IngredientListData)){?>
                                 <?php foreach($IngredientListData as $key => $IngredientListData) :?>
@@ -61,9 +61,23 @@
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="Supplier Name">Pizza Size</label>
-                            <input type="text" class="form-control text-dark" id="PizzaSize" name="PizzaSize"
-                                placeholder="Pizza Size" required>
+                            <label for="Base Pizza">Base Pizza</label>
+                            <select class="form-control" id="BasePriceId" name="BasePriceId" class="selectpicker"
+                                required>
+
+                                <?php if(is_array($PizzaSizeList)){?>
+                                <option value="">Select a Base Pizza</option>
+                                <?php foreach($PizzaSizeList as $key => $PizzaSizeList) :?>
+                                <option value=<?php echo $PizzaSizeList['SizeId']?>>
+                                    <span style="color:green"> <?php echo $PizzaSizeList['BasePizzaName']?> ->
+                                        Size -> <?php echo $PizzaSizeList['PizzaSize']?>
+                                        Price ->
+                                        <?php echo $PizzaSizeList['BasePrice']?></span>
+                                </option>
+
+                                <?php endforeach; ?>
+                                <?php }?>
+                            </select>
 
                         </div>
                     </div>

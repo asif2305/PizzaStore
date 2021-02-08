@@ -12,27 +12,29 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered" id="" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Order ID</th>
                             <th>Customer Name</th>
                             <th>Email</th>
                             <th>Ingredient Name</th>
-                            <th>Order Status</th>
                             <th>Pizza Name</th>
                             <th>Pizza Size</th>
+                            <th>Order Status</th>
+                            <th>Ordered Time</th>
                             <th>Operations</th>
                         </tr>
                     </thead>
-                    <tfoot>
+                    <tfoot class="text-center">
                         <tr>
                             <th>Order ID</th>
                             <th>Customer Name</th>
                             <th>Email</th>
                             <th>Ingredient Name</th>
-                            <th>Order Status</th>
                             <th>Pizza Name</th>
                             <th>Pizza Size</th>
+                            <th>Order Status</th>
+                            <th>Ordered Time</th>
                             <th>Operations</th>
                         </tr>
                     </tfoot>
@@ -40,7 +42,7 @@
 
                         <?php if(is_array($OrderDataList)){?>
                         <?php foreach($OrderDataList as $key => $OrderDataList) :?>
-                        <tr>
+                        <tr class="text-center">
                             <td style="display:none"><?php echo $OrderDataList['ingredientids'] ?></td>
                             <td style="display:none"><?php echo $OrderDataList['UserId'] ?></td>
 
@@ -50,10 +52,14 @@
                             <td><?php echo $OrderDataList['CustomerName'] ?></td>
                             <td><?php echo $OrderDataList['Email'] ?></td>
                             <td><?php echo $OrderDataList['ingredientnames'] ?></td>
-                            <td><?php echo $OrderDataList['StatusName'] ?></td>
-                            <td><?php echo $OrderDataList['PizzaName'] ?></td>
+                            <td><?php echo $OrderDataList['BasePizzaName'] ?></td>
                             <td><?php echo $OrderDataList['PizzaSize'] ?></td>
-
+                            <?php if($OrderDataList['StatusId']==0):{?>
+                            <td><span class="btn-danger"><?php echo $OrderDataList['StatusName'] ?></span></td>
+                            <?php } else: {?>
+                            <td><span class="btn-success"><?php echo $OrderDataList['StatusName'] ?></span></td>
+                            <?php } endif?>
+                            <td><?php echo $OrderDataList['date_trunc'] ?></td>
                             <td>
                                 <div class="btn-group" data-toggle="buttons">
                                     <button type="button" class="btn btn-danger btn-xs processOrder"><i

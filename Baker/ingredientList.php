@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Ingredient Name</th>
                             <th>Regional Province</th>
@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
 
-                    <tfoot>
+                    <tfoot class="text-center">
                         <tr>
                             <th>Ingredient Name</th>
                             <th>Regional Province</th>
@@ -40,7 +40,7 @@
                             <th>Operations</th>
                         </tr>
                     </tfoot>
-                    <tbody>
+                    <tbody class="text-center">
                         <?php if(is_array($ingredientList)){?>
                         <?php foreach($ingredientList as $key => $ingredientList) :?>
                         <tr>
@@ -59,14 +59,16 @@
                             <td><?php echo $ingredientList['Selling_Price'] ?></td>
                             <td><?php echo $ingredientList['Available_Quantity'] ?></td>
                             <td style="display:none"><?php echo $ingredientList['Visibility'] ?></td>
-                            <td><?php
-                                            if( $ingredientList['Visibility']=="1"){
-                                                 echo "True";
-                                             }
-                                             else{
-                                                 echo "False";
-                                             }
-                                             ?>
+                            <td>
+                                <?php if($ingredientList['Visibility']=="1"):{?>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <button type="button"
+                                        class="btn btn-success btn-xs ShowOrHideIngredient">Show</button>
+                                    <?php } else: {?>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <button type="button"
+                                            class="btn btn-warning btn-xs ShowOrHideIngredient">Hide</button>
+                                        <?php } endif?>
                             </td>
                             <td style="display:none"><?php echo $ingredientList['ItemId'] ?></td>
                             <td style="display:none"><?php echo $ingredientList['SupplierVisibility'] ?></td>

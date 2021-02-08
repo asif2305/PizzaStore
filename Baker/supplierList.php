@@ -16,7 +16,7 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered" id="" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>Supplier ID</th>
                             <th>Supplier Name</th>
@@ -28,7 +28,7 @@
 
                         </tr>
                     </thead>
-                    <tfoot>
+                    <tfoot class="text-center">
                         <tr>
                             <th>Supplier ID</th>
                             <th>Supplier Name</th>
@@ -38,8 +38,8 @@
                             <th>Operations</th>
                         </tr>
                     </tfoot>
-                    <tbody>
-                        <?php if(is_array($emps)){?>
+                    <tbody class="text-center">
+                        <?php if(is_array($emps)):{?>
                         <?php foreach($emps as $key => $emp) :?>
                         <tr>
                             <td><?php echo $emp['SupplierId'] ?></td>
@@ -47,14 +47,16 @@
                             <td><?php echo $emp['Address'] ?></td>
                             <td><?php echo $emp['IdentificationNumber'] ?></td>
                             <td style="display:none"><?php echo $emp['Visibility'] ?></td>
-                            <td><?php
-                                            if( $emp['Visibility']=="1"){
-                                                 echo "True";
-                                             }
-                                             else{
-                                                 echo "False";
-                                             }
-                                             ?>
+                            <td>
+                                <?php if($emp['Visibility']=="1"):{?>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <button type="button"
+                                        class="btn btn-success btn-xs ShowOrHideSupplier">Show</button>
+                                    <?php } else: {?>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <button type="button"
+                                            class="btn btn-warning btn-xs ShowOrHideSupplier">Hide</button>
+                                        <?php } endif?>
                             </td>
                             <td>
                                 <div class="btn-group" data-toggle="buttons">
@@ -67,7 +69,7 @@
                             </td>
                         </tr>
                         <?php endforeach; ?>
-                        <?php }?>
+                        <?php } endif?>
                     </tbody>
                 </table>
             </div>

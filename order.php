@@ -4,8 +4,8 @@ $newObj = new DbQuery();
 $IngredientListData = $newObj->getall_ingredientlistwithpriceandprovince();
 $pizza_baker=$newObj->getPizzaBakerData();
 $OrderDataList=$newObj->get_order_list();
-#echo '</br>';
-#print_r($OrderDataList);
+$PizzaSizeList = $newObj->getall_PizzaSize();
+
 
 ?>
 
@@ -80,18 +80,13 @@ $(document).ready(function() {
         }).get();
 
         console.log(data)
-
+        var dataValues = data[6] + ' -> Size ->' + data[7] + ' Price -> ' + data[11];
         //var mySelect = $('#existingIngredientList');
         $('#existingIngredientList').val(data[5]);
         $('#existingbakerid').val(data[1]);
-        $('#existingsize').val(data[8]);
-        $('#existingIngredientListID').val(data[0])
-
-
-
-
-
-
+        $('#existingsize').val(dataValues);
+        $('#existingIngredientListID').val(data[0]);
+        $('#existingSizeId').val(data[8]);
 
     });
 });
