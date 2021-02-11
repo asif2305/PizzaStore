@@ -96,44 +96,7 @@ $(document).ready(function() {
 
 
 
-<script>
-$(document).ready(function() {
-    $("#supplieridentificationno").on("input", function() {
-        //  console.log($(this).val().trim());
-        // alert();
 
-        var supplieridentificationno = $(this).val().trim();
-
-        if (supplieridentificationno != '') {
-            // alert(suppliernameDuplicateChecking);
-            $.ajax({
-                url: 'insertSupplier.php',
-                method: 'POST',
-                dataType: 'JSON',
-                data: {
-                    supplieridentificationno: supplieridentificationno
-                },
-                success: function(response) {
-                    console.log(response.status);
-                    if (response.status === "Yes") {
-                        $('#supplieridentificationno').val();
-                    } else {
-                        alert("Data already exists!!!");
-                        $("#supplieridentificationno").val("");
-                    }
-                    //  alert(response);
-
-                }
-            });
-        } else {
-            $("#suppliername").html("");
-        }
-
-
-    });
-
-});
-</script>
 </body>
 
 </html>

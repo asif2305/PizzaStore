@@ -31,10 +31,16 @@ if(isset($_POST['delete_data'])){
 
 }
 
-if(isset($_POST['supplieridentificationno'])){
+if(isset($_POST['supplieridentification'])){
+
+    echo '<script type="text/javascript">alert("akjwekkal ")</script>';
   
-    $DuplicateChecking=$_POST['supplieridentificationno'];
-    $emps = $connection->supplierIdentificationDuplicateChecking($DuplicateChecking);
+    $identificationnumber=$_POST['supplieridentification'];
+    echo "<pre>";
+    echo "<script> console.log('aaa');document.location='baker.php'</script>";
+    echo "</pre>";
+ 
+    $emps = $connection->supplierIdentificationDuplicateChecking($identificationnumber);
       
 }
 

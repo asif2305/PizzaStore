@@ -207,44 +207,46 @@ $(document).ready(function() {
 </script>
 <!-- Ingredient Restoke  #################################################################- -->
 
-<script>
+<!-- <script>
 $(document).ready(function() {
-    $("#supplieridentificationno").on("input", function() {
+    $("#supplieridentificationno").change(function() {
         //  console.log($(this).val().trim());
-        // alert();
+
+        //  alert($(this).val().trim());
 
         var supplieridentificationno = $(this).val().trim();
 
         if (supplieridentificationno != '') {
-            // alert(suppliernameDuplicateChecking);
+            alert(supplieridentificationno);
             $.ajax({
                 url: 'insertSupplier.php',
                 method: 'POST',
                 dataType: 'JSON',
                 data: {
-                    supplieridentificationno: supplieridentificationno
+                    supplieridentification: supplieridentificationno
                 },
                 success: function(response) {
-                    console.log(response.status);
+                    console.log('response.status');
+                    alert(response.status);
                     if (response.status === "Yes") {
-                        $('#supplieridentificationno').val();
+                        $('#supplieridentificationno').val("dsfsdfsdf");
                     } else {
                         alert("Data already exists!!!");
-                        // $("#supplieridentificationno").val("");
+                        $("#supplieridentificationno").val("123456789876543");
                     }
-                    alert(response);
+                    alert("ksdhfsdflksjdlkf");
 
                 }
             });
         } else {
-            $("#suppliername").html("");
+            $("#supplieridentificationno").html("");
         }
 
 
     });
 
 });
-</script>
+</script> -->
 <!-- Hide and show #################################################################- -->
 <script>
 $(document).ready(function() {

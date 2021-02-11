@@ -28,15 +28,33 @@ class DbQuery
 	
 	public function insertSupplierData($suppliername, $supplieraddress,$visibility,$supplieridentificationno){
 
-		$sql="CALL sp_add_only_supplier('$suppliername', '$supplieraddress','$visibility','$supplieridentificationno')";
-		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
-		if($queryRecords){
-			echo "<script>alert('Supplier Data Saved Successfully');document.location='baker.php'</script>";
-		}
-		else{
-			echo "<script>alert(' Supplier Data Not Saved Successfully');document.location='baker.php'</script>";
-		}
-		
+		$checkingData=False;
+
+
+				$sql = "SELECT * FROM totalRecords('$supplieridentificationno') ";
+				$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
+				$data = pg_fetch_all($queryRecords);
+			
+				if(is_array($data)){
+						echo "<script> alert('Indentification Number $supplieridentificationno is already exist.');document.location='baker.php'</script>";
+					exit;
+				}
+				else{
+					$checkingData=True;
+				}
+		    
+		if($checkingData){
+			$sql="CALL sp_add_only_supplier('$suppliername', '$supplieraddress','$visibility','$supplieridentificationno')";
+			$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
+			if($queryRecords){
+				echo "<script>alert('Supplier Data Saved Successfully');document.location='baker.php'</script>";
+			}
+			else{
+				echo "<script>alert(' Supplier Data Not Saved Successfully');document.location='baker.php'</script>";
+			}
+			
+		}						
+	
 		
 	}
 
@@ -69,22 +87,22 @@ class DbQuery
 		
 		
 	}
-	// public function supplierIdentificationDuplicateChecking($DuplicateChecking) {
-	
-	// 	$sql = "SELECT * FROM totalRecords('$DuplicateChecking') ";
-	// 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
+	 public function supplierIdentificationDuplicateChecking($identificationnumber) {
 		
-	// 	$data = pg_fetch_all($queryRecords);
+	 	$sql = "SELECT * FROM totalRecords('$identificationnumber') ";
+	 	$queryRecords = pg_query($this->conn, $sql) or die("error to fetch supplier data");
+		
+	 	$data = pg_fetch_all($queryRecords);
 	// 	//exit;
-	// 	$response = array("status"=>"Yes");
+	 	$response = array("status"=>"Yes");
 	
-	// 	if(is_array($data)){
-	// 			 $response = array("status"=>"No");
+	 	if(is_array($data)){
+	 			 $response = array("status"=>"No");
 		 
-	// 	 }
-	// 	 echo json_encode($response);
-	// #die;
-	// }
+	 	 }
+		 echo json_encode($response);
+	 #die;
+	 }
 
  #################################################################  Supplier End
 
@@ -181,11 +199,10 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 		if($queryRecords){
 
-			echo '<script> alert("Data Deleted Successfully");</script>';
-			header('Location:baker.php');
+			echo "<script>alert('Ingredient Data Deleted Successfully');document.location='baker.php'</script>";
 		}
 		else{
-			echo '<script> alert("Data Not Deleted Successfully");</script>';
+			echo "<script>alert('Ingredient Data Not Deleted Successfully');document.location='baker.php'</script>";
 		}
 		
 		
@@ -198,11 +215,10 @@ $EditbuyingPrice,$EditbuyingQuantity,$EditsellingPrice,$EditavailableQuantity,$E
 		$queryRecords = pg_query($this->conn, $sql) or die("error to fetch customer data");
 		if($queryRecords){
 	
-			echo '<script> alert("Data Saved Successfully");</script>';
-			header('Location:baker.php');
+			echo "<script>alert('Ingredient Data Restoke Successfully');document.location='baker.php'</script>";
 		}
 		else{
-			echo '<script> alert("Data Not Saved Successfully");</script>';
+			echo "<script>alert('Ingredient Data Not Restoke Successfully');document.location='baker.php'</script>";
 		}
 		}
  #################################################################  Ingredient End
@@ -224,8 +240,7 @@ public function getall_PizzaSize() {
 
 public function insertOrderData($bakerid,$customerName,$customerEmail,$customerPhone,$customerAddress,$IngredientList,$SizeId,$OrderStatudId)
 		{
-			#$PrizaName="Italian";
-     
+			
 			$checkingData=False;
 
 			if (is_array($IngredientList) || is_object($IngredientList))
@@ -269,11 +284,10 @@ public function insertOrderData($bakerid,$customerName,$customerEmail,$customerP
 				
 				if($queryRecords){
 				
-					echo '<script> alert("Data Saved Successfully");</script>';
-					header('Location:order.php');
+					echo "<script>alert('$customerName Order Pizza Successfully');document.location='order.php'</script>";
 				}
 				else{
-					echo '<script> alert("Data Not Saved Successfully");</script>';
+					echo "<script>alert('$customerName Order Pizza Unsuccessfully');document.location='order.php'</script>";
 				}
 					
 		
@@ -298,12 +312,10 @@ public function insertOrderData($bakerid,$customerName,$customerEmail,$customerP
 	 $queryRecords = pg_query($this->conn, $sql) or die("error to fetch employees data");
 	 if($queryRecords){
 
-		 echo '<script> alert("Data Processed Successfully");</script>';
-		
-		 header('Location:baker.php');
+		echo "<script>alert('Order Process Successfully');document.location='baker.php'</script>";
 	 }
 	 else{
-		 echo '<script> alert("Data Not Deleted Successfully");</script>';
+		echo "<script>alert('Order did not process Successfully');document.location='baker.php'</script>";
 	 }
 	 
 	 

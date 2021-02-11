@@ -1,1 +1,11 @@
 1.https://www.jscripters.com/jquery-disadvantages-and-advantages/
+2.https://www.geeksforgeeks.org/difference-between-centralized-database-and-distributed-database/
+3.https://benchpartner.com/advantage-and-disadvantage-of-distributed-database-management-system-ddbms/
+4.https://getbootstrap.com/
+5.https://www.xeliumtech.com/blog/Top-10-Benefits-of-Using-Bootstrap
+6:https://www.educba.com/advantages-of-html/
+7.https://vanseodesign.com/css/benefits-of-cascading-style-sheets/
+8.https://www.productplan.com/glossary/dynamic-systems-development-method/
+9.https://www.solutionsiq.com/agile-glossary/dynamic-systems-development-method-dsdm/
+10:https://www.goodworklabs.com/6-advantages-of-php/
+11:https://tekslate.com/11-benefits-jquery-every-web-designers-know
