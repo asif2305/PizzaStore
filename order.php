@@ -1,4 +1,5 @@
-<!-- This order.php is developed by Md. Mahfujur Rahman and Matrikel-Nr:613925 -->
+<!-- 
+    Order related tables,store procedure,views, and order.php is done by Md. Mahfujur Rahman and Matrikel-Nr:613925 -->
 <?php 
 include('response.php');
 $newObj = new DbQuery();
@@ -24,7 +25,7 @@ $PizzaSizeList = $newObj->getall_PizzaSize();
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+            <div class="text-muted">Copyright &copy; Your Website 2021</div>
             <div>
                 <a href="#">Privacy Policy</a>
                 &middot;

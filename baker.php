@@ -1,3 +1,5 @@
+<!-- 
+    Order related tables,store procedure,views, and order.php is done by Asif Ahmed and Matrikel-Nr:509701 -->
 <?php 
 include('response.php');
 $newObj = new DbQuery();
@@ -43,7 +45,7 @@ $suppliervisibility=$newObj->getall_Visible_supplier();
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+            <div class="text-muted">Copyright &copy; Your Website 2021</div>
             <div>
                 <a href="#">Privacy Policy</a>
                 &middot;
@@ -207,46 +209,7 @@ $(document).ready(function() {
 </script>
 <!-- Ingredient Restoke  #################################################################- -->
 
-<!-- <script>
-$(document).ready(function() {
-    $("#supplieridentificationno").change(function() {
-        //  console.log($(this).val().trim());
 
-        //  alert($(this).val().trim());
-
-        var supplieridentificationno = $(this).val().trim();
-
-        if (supplieridentificationno != '') {
-            alert(supplieridentificationno);
-            $.ajax({
-                url: 'insertSupplier.php',
-                method: 'POST',
-                dataType: 'JSON',
-                data: {
-                    supplieridentification: supplieridentificationno
-                },
-                success: function(response) {
-                    console.log('response.status');
-                    alert(response.status);
-                    if (response.status === "Yes") {
-                        $('#supplieridentificationno').val("dsfsdfsdf");
-                    } else {
-                        alert("Data already exists!!!");
-                        $("#supplieridentificationno").val("123456789876543");
-                    }
-                    alert("ksdhfsdflksjdlkf");
-
-                }
-            });
-        } else {
-            $("#supplieridentificationno").html("");
-        }
-
-
-    });
-
-});
-</script> -->
 <!-- Hide and show #################################################################- -->
 <script>
 $(document).ready(function() {
